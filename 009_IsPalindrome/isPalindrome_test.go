@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestReverse(t *testing.T) {
+func Test(t *testing.T) {
 	//	测试用例
 	cases := []struct {
 		name   string
