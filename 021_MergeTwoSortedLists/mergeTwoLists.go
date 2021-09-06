@@ -5,6 +5,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
+//My method
 // 执行用时：0 ms, 在所有 Go 提交中击败了100.00%的用户
 // 内存消耗：2.5 MB, 在所有 Go 提交中击败了73.72%的用户
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
