@@ -18,6 +18,9 @@ func Test(t *testing.T) {
 		{"3 test 3", "", "", 0},
 		{"4 test 4", "aaa", "", 0},
 		{"5 test 5", "a", "a", 0},
+		{"6 test 6", "mississippi", "issi", 1},
+		{"7 test 7", "aabaaabaaac", "aabaaac", 4},
+		{"8 test 8", "abcdababcdab", "abcdabd", -1},
 	}
 
 	//	开始测试
