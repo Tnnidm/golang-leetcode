@@ -6,32 +6,27 @@ import (
 )
 
 func mostCommonWord(paragraph string, banned []string) string {
+	// paragraphSplit := strings.Split(strings.ToLower(paragraph), " ")
 	// 使用非字母来分割原句子，strings包值得好好看一下
-	words := strings.FieldsFunc(paragraph, func(c rune) bool {
+	paragraphSplit := strings.FieldsFunc(strings.ToLower(paragraph), func(c rune) bool {
 		return !unicode.IsLetter(c)
 	})
-	mapWords := make(map[string]int)
-
-	for i := 0; i < len(words); i++ {
-		word := strings.ToLower(words[i])
-		mapWords[word]++
-	}
-
-	max := 0
-	res := ""
-	for word, count := range mapWords {
-		if count > max && !inBanned(word, banned) {
-			max = count
-			res = word
+	paraMap := make(map[string]int)
+	maxWord := ""
+	for _, v := range paragraphSplit {
+		paraMap[v]++
+		if paraMap[v] > paraMap[maxWord] {
+			if !isBanned(v, banned) {
+				maxWord = v
+			}
 		}
 	}
-
-	return res
+	return maxWord
 }
 
-func inBanned(word string, banned []string) bool {
-	for _, bannedStr := range banned {
-		if word == bannedStr {
+func isBanned(word string, banned []string) bool {
+	for _, v := range banned {
+		if word == v {
 			return true
 		}
 	}
