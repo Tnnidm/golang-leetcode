@@ -64,6 +64,32 @@ func abs(x int) int {
 // 	return x
 // }
 
+// // 桶排序
+// func allCellsDistOrder(rows int, cols int, rCenter int, cCenter int) [][]int {
+// 	result := map[int][][]int{}
+// 	for i := 0; i < rows; i++ {
+// 		for j := 0; j < cols; j++ {
+// 			result[distance(i, j, rCenter, cCenter)] = append(result[distance(i, j, rCenter, cCenter)], []int{i, j})
+// 		}
+// 	}
+// 	ans := [][]int{}
+// 	for i := 0; i <= len(result); i++ {
+// 		ans = append(ans, result[i]...)
+// 	}
+// 	return ans
+// }
+
+// func distance(i, j, rCenter, cCenter int) int {
+// 	return abs(i-rCenter) + abs(j-rCenter)
+// }
+
+// func abs(x int) int {
+// 	if x < 0 {
+// 		return -x
+// 	}
+// 	return x
+// }
+
 func main() {
 	allCellsDistOrder(1, 2, 0, 0)
 }
