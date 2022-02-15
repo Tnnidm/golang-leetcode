@@ -21,7 +21,7 @@ type ListNode struct {
 // 	return ans
 // }
 
-// 实现2
+// 实现2: 因为先计算切片长度，避免了自动扩容带来的内存浪费
 func reversePrint(head *ListNode) []int {
 	count := 0
 	for temp := head; temp != nil; temp = temp.Next {
@@ -34,3 +34,17 @@ func reversePrint(head *ListNode) []int {
 	}
 	return ans
 }
+
+// // 实现3: 递归, 会造成大量内存消耗，远不如循环方案
+// func reversePrint(head *ListNode) []int {
+// 	ans := []int{}
+// 	reverseAppend(head, &ans)
+// 	return ans
+// }
+
+// func reverseAppend(head *ListNode, ans *[]int) {
+// 	if head != nil {
+// 		reverseAppend(head.Next, ans)
+// 		*ans = append(*ans, head.Val)
+// 	}
+// }
