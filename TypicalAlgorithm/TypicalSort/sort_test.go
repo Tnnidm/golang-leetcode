@@ -5,17 +5,17 @@ import (
 	"testing"
 )
 
-func sort(arr []int) []int {
+func typicalSort(arr []int) []int {
 	// arr = quickSort(arr)    // 快速排序
 	// arr = bubbleSort(arr)   // 冒泡排序
 	// arr = selectSort(arr)   // 选择排序
 	// arr = insertSort(arr)   // 插入排序
 	// arr = mergeSort(arr)    // 归并排序
-	arr = heapSort(arr) // 堆排序
-	// arr = shellSort(arr)    // 希尔排序
+	// arr = heapSort(arr) // 堆排序
+	arr = shellSort(arr) // 希尔排序
 	// arr = countingSort(arr) // 计数排序
-	// arr = bucketSort(arr)   // 桶排序
-	// arr = radixSort(arr)    // 基数排序
+	// arr = bucketSort(arr) // 桶排序
+	// arr = radixSort(arr) // 基数排序
 	return arr
 }
 
@@ -34,7 +34,7 @@ func Test(t *testing.T) {
 		t.Run(
 			c.name,
 			func(t *testing.T) {
-				ret := sort(c.input)
+				ret := typicalSort(c.input)
 				if !reflect.DeepEqual(ret, c.expect) {
 					t.Fatalf("expect: %v, but got: %v, with input: %v", c.expect, ret, c.input)
 				}
