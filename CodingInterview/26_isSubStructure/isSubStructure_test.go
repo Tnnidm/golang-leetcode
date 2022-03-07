@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_getKthFromEnd(t *testing.T) {
+func Test_isSubStructure(t *testing.T) {
 	cases := []struct {
 		name   string
 		input1 *TreeNode
