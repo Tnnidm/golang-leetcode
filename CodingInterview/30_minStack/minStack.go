@@ -3,7 +3,6 @@ package minStack
 type MinStack struct {
 	stack    []int
 	minValue []int
-	length   int
 }
 
 /** initialize your data structure here. */
@@ -13,28 +12,25 @@ func Constructor() MinStack {
 
 func (ms *MinStack) Push(x int) {
 	ms.stack = append(ms.stack, x)
-	if ms.length == 0 || x < ms.minValue[ms.length-1] {
+	if len(ms.minValue) == 0 || x <= ms.minValue[len(ms.minValue)-1] {
 		ms.minValue = append(ms.minValue, x)
-	} else {
-		ms.minValue = append(ms.minValue, ms.minValue[ms.length-1])
 	}
-	ms.length++
 }
 
 func (ms *MinStack) Pop() {
-	ms.stack = ms.stack[:ms.length-1]
-	ms.minValue = ms.minValue[:ms.length-1]
-	ms.length--
+	if ms.stack[len(ms.stack)-1] == ms.minValue[len(ms.minValue)-1] {
+		ms.minValue = ms.minValue[:len(ms.minValue)-1]
+	}
+	ms.stack = ms.stack[:len(ms.stack)-1]
 }
 
 func (ms *MinStack) Top() int {
-	return ms.stack[ms.length-1]
+	return ms.stack[len(ms.stack)-1]
 }
 
 func (ms *MinStack) Min() int {
-	return ms.minValue[ms.length-1]
+	return ms.minValue[len(ms.minValue)-1]
 }
-
 func minStack() (int, int, int) {
 	obj := Constructor()
 	obj.Push(-2)
