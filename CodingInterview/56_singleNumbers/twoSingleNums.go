@@ -1,6 +1,6 @@
-package numberAppearTimes
+package singleNumbers
 
-func singleNumbers(nums []int) []int {
+func twoSingleNumbers(nums []int) []int {
 	numsLen := len(nums)
 	temp := 0
 	for i := 0; i < numsLen; i++ {
