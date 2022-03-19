@@ -22,7 +22,7 @@ import (
 func reverseWords(s string) string {
 	words := strings.Fields(s)
 	wordNum := len(words)
-	for i := 0; i <= wordNum/2; i++ {
+	for i := 0; i < wordNum/2; i++ {
 		words[i], words[wordNum-1-i] = words[wordNum-1-i], words[i]
 	}
 	return strings.Join(words, " ")
