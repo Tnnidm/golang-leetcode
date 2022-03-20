@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_dicesProbability(t *testing.T) {
+func Test_isStraight(t *testing.T) {
 	cases := []struct {
 		name   string
 		input  []int
