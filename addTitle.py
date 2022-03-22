@@ -1,7 +1,7 @@
 import os
 
-title = "3. Longest Substring Without Repeating Characters"
-goname = "winnerOfGame"
+title = "5. Longest Palindromic Substring"
+goname = "longestPalindrome"
 
 if title != "" and goname != "":
     nameStr = title.replace(" ", "").replace(".", "_")
