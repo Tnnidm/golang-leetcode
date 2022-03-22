@@ -1,7 +1,7 @@
 import os
 
-title = "5. Longest Palindromic Substring"
-goname = "longestPalindrome"
+title = "11. Container With Most Water"
+goname = "maxArea"
 
 if title != "" and goname != "":
     nameStr = title.replace(" ", "").replace(".", "_")
