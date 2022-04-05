@@ -24,7 +24,11 @@ package countBits
 func countBits(n int) []int {
 	result := make([]int, n+1)
 	for i := 1; i <= n; i++ {
-		result[i] = result[i&(i-1)] + 1
+		if i&1 == 0 {
+			result[i] = result[i>>1]
+		} else {
+			result[i] = result[i>>1] + 1
+		}
 	}
 	return result
 }
