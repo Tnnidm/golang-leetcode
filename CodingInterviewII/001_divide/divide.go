@@ -3,43 +3,41 @@ package divide
 import "math"
 
 func divide(a int, b int) int {
-	if a == math.MinInt32 {
-		switch b {
-		case -1:
-			return math.MaxInt32
-		case 1:
-			return math.MinInt32
-		case math.MinInt32:
-			return 1
-		}
-	}
-	if a == 0 || b == math.MinInt32 {
-		return 0
-	}
-	var falseFlag bool
+	var negFlag bool
 	if a < 0 {
 		a = -a
-		falseFlag = !falseFlag
+		negFlag = !negFlag
 	}
 	if b < 0 {
 		b = -b
-		falseFlag = !falseFlag
+		negFlag = !negFlag
 	}
-	temp, count := b, 1
-	for temp<<1 <= a {
-		temp <<= 1
-		count <<= 1
+	if a < b {
+		return 0
 	}
 	result := 0
-	for a >= b {
-		if a >= temp {
-			result += count
-			a -= temp
+	count := 1
+	var base int
+	for base = b; base<<1 <= a; base <<= 1 {
+		count <<= 1
+		if count > math.MaxInt32 {
+			if negFlag {
+				return math.MinInt32
+			}
+			return math.MaxInt32
 		}
-		temp >>= 1
-		count >>= 1
 	}
-	if falseFlag {
+	result += count
+	a -= base
+	for a != 0 {
+		for base > a {
+			base >>= 1
+			count >>= 1
+		}
+		a -= base
+		result += count
+	}
+	if negFlag {
 		return -result
 	}
 	return result
