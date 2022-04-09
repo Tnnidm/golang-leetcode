@@ -7,7 +7,7 @@ func pivotIndex(nums []int) int {
 	}
 	preSum := 0
 	for i, num := range nums {
-		if 2*preSum+num == sum {
+		if preSum<<1+num == sum {
 			return i
 		}
 		preSum += num
