@@ -2,7 +2,7 @@ package largestRectangleArea
 
 func largestRectangleArea(heights []int) int {
 	heightsLen := len(heights)
-	stack := make([]int, 0, 16)
+	stack := make([]int, 0, heightsLen/4)
 	stackLen := 0
 	maxArea := 0
 	for i := 0; i < heightsLen; i++ {
