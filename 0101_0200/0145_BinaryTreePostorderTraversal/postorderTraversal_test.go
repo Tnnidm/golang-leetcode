@@ -27,7 +27,7 @@ func Test(t *testing.T) {
 					Right: nil,
 				},
 			},
-			[]int{1, 2, 3},
+			[]int{3, 2, 1},
 		},
 		{
 			"case 4",
@@ -44,7 +44,7 @@ func Test(t *testing.T) {
 					Right: &TreeNode{Val: 7},
 				},
 			},
-			[]int{4, 2, 1, 3, 6, 5, 7},
+			[]int{1, 3, 2, 5, 7, 6, 4},
 		},
 	}
 
