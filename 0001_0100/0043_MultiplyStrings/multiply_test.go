@@ -1,0 +1,25 @@
+package multiply
+
+import (
+	"reflect"
+	"testing"
+)
+
+func Test_multiply(t *testing.T) {
+	cases := []struct {
+		name   string
+		input1 string
+		input2 string
+		expect string
+	}{
+		{"case 1", "123", "456", "56088"},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			ret := multiply(c.input1, c.input2)
+			if !reflect.DeepEqual(ret, c.expect) {
+				t.Fatalf("expect: %v, but got: %v, with input %v and %v", c.expect, ret, c.input1, c.input2)
+			}
+		})
+	}
+}
