@@ -1,39 +1,30 @@
 package minArray
 
 func minArray(numbers []int) int {
-	begin, end := 0, len(numbers)-1
-	mid := begin + (end-begin)/2
-	for mid != begin {
-		if numbers[mid] == numbers[end] && numbers[mid] == numbers[begin] {
+	numsLen := len(numbers)
+	left, right := 0, numsLen-1
+	for left < right {
+		mid := left + (right-left)>>1
+		if mid > 0 && numbers[mid-1] > numbers[mid] {
+			return numbers[mid]
+		}
+		if numbers[mid] > numbers[right] {
+			left = mid + 1
+		} else if numbers[mid] < numbers[right] {
+			right = mid
+		} else {
 			minValue := numbers[mid]
-			for i := begin; i < mid; i++ {
+			for i := mid + 1; i < right; i++ {
 				if numbers[i] < minValue {
 					minValue = numbers[i]
 				}
 			}
-			if minValue == numbers[mid] {
-				begin = mid
-				mid = begin + (end-begin)/2
-				continue
-			} else {
+			if minValue < numbers[mid] {
 				return minValue
+			} else {
+				right = mid
 			}
 		}
-		if numbers[mid] <= numbers[end] {
-			end = mid
-			mid = begin + (end-begin)/2
-			continue
-		}
-		if numbers[mid] >= numbers[begin] {
-			begin = mid
-			mid = begin + (end-begin)/2
-			continue
-		}
-
 	}
-	if numbers[begin] >= numbers[end] {
-		return numbers[end]
-	} else {
-		return numbers[begin]
-	}
+	return numbers[left]
 }

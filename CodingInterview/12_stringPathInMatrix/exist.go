@@ -1,34 +1,35 @@
 package exist
 
 func exist(board [][]byte, word string) bool {
-	rowNum := len(board)
-	colNum := len(board[0])
-	for i := 0; i < rowNum; i++ {
-		for j := 0; j < colNum; j++ {
-			if existInMatrix(i, j, board, word, rowNum, colNum) {
+	m, n := len(board), len(board[0])
+	wordLen := len(word)
+	searched := make([][]bool, m)
+	for i := range searched {
+		searched[i] = make([]bool, n)
+	}
+	var dfs func(i int, j int, index int) bool
+	dfs = func(i int, j int, index int) bool {
+		if index == wordLen {
+			return true
+		}
+		if i < 0 || i >= m || j < 0 || j >= n || searched[i][j] {
+			return false
+		}
+		if board[i][j] == word[index] {
+			searched[i][j] = true
+			if dfs(i-1, j, index+1) || dfs(i+1, j, index+1) || dfs(i, j-1, index+1) || dfs(i, j+1, index+1) {
+				return true
+			}
+			searched[i][j] = false
+		}
+		return false
+	}
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if dfs(i, j, 0) {
 				return true
 			}
 		}
-	}
-	return false
-}
-func existInMatrix(i int, j int, board [][]byte, word string, rowNum int, colNum int) bool {
-	if len(word) == 0 {
-		return true
-	}
-	if i < 0 || i >= rowNum || j < 0 || j >= colNum {
-		return false
-	}
-	if board[i][j] == word[0] {
-		temp := board[i][j]
-		board[i][j] = ' '
-		if existInMatrix(i-1, j, board, word[1:], rowNum, colNum) ||
-			existInMatrix(i+1, j, board, word[1:], rowNum, colNum) ||
-			existInMatrix(i, j-1, board, word[1:], rowNum, colNum) ||
-			existInMatrix(i, j+1, board, word[1:], rowNum, colNum) {
-			return true
-		}
-		board[i][j] = temp
 	}
 	return false
 }
