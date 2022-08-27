@@ -8,27 +8,24 @@ type TreeNode struct {
 
 func pathSum(root *TreeNode, target int) [][]int {
 	result := [][]int{}
-	dfs(root, target, &result, []int{})
-	return result
-}
-
-func dfs(root *TreeNode, target int, result *[][]int, path []int) {
-	if root == nil {
-		return
-	}
-	path = append(path, root.Val)
-	target -= root.Val
-	if root.Left == nil && root.Right == nil {
-		if target == 0 {
-			pathLen := len(path)
-			newpath := make([]int, pathLen)
-			for i := 0; i < pathLen; i++ {
-				newpath[i] = path[i]
-			}
-			(*result) = append((*result), newpath)
+	path := []int{}
+	var dfs func(root *TreeNode, target int)
+	dfs = func(root *TreeNode, target int) {
+		if root == nil {
+			return
 		}
-	} else {
-		dfs(root.Left, target, result, path)
-		dfs(root.Right, target, result, path)
+		path = append(path, root.Val)
+		target -= root.Val
+		if root.Left == nil && root.Right == nil {
+			if target == 0 {
+				result = append(result, append([]int{}, path...))
+			}
+		} else {
+			dfs(root.Left, target)
+			dfs(root.Right, target)
+		}
+		path = path[:len(path)-1]
 	}
+	dfs(root, target)
+	return result
 }

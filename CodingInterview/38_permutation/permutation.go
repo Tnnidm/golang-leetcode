@@ -1,27 +1,28 @@
 package permutation
 
 func permutation(s string) []string {
-	index := 0
 	result := []string{}
-	dfs([]byte(s), index, &result)
-	return result
-}
-
-func dfs(s []byte, index int, result *[]string) {
-	if index == len(s)-1 {
-		*result = append(*result, string(s))
-	} else {
-		indexMap := map[byte]int{}
-		for i := index + 1; i < len(s); i++ {
-			indexMap[s[i]] = i
+	permut := []byte(s)
+	sLen := len(s)
+	var dfs func(int)
+	dfs = func(index int) {
+		if index == sLen-1 {
+			result = append(result, string(permut))
+			return
 		}
-		dfs(s, index+1, result)
-		for _, i := range indexMap {
-			if s[index] != s[i] {
-				s[i], s[index] = s[index], s[i]
-				dfs(s, index+1, result)
-				s[i], s[index] = s[index], s[i]
+		dfs(index + 1)
+		swap := map[byte]int{}
+		for i := index + 1; i < sLen; i++ {
+			swap[permut[i]] = i
+		}
+		for _, i := range swap {
+			if permut[index] != permut[i] {
+				permut[i], permut[index] = permut[index], permut[i]
+				dfs(index + 1)
+				permut[i], permut[index] = permut[index], permut[i]
 			}
 		}
 	}
+	dfs(0)
+	return result
 }
