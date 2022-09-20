@@ -7,24 +7,20 @@ type TreeNode struct {
 }
 
 func pathSum(root *TreeNode, targetSum int) int {
-	pathMap := map[int]int{}
-	num := 0
-	preOrder(root, 0, targetSum, &pathMap, &num)
-	return num
-}
-
-func preOrder(root *TreeNode, path int, targetSum int, pathMap *map[int]int, num *int) {
-	if root != nil {
-		path += root.Val
-		if path == targetSum {
-			*num++
+	pathMap := map[int]int{0: 1}
+	result := 0
+	var preOrder func(root *TreeNode, sum int)
+	preOrder = func(root *TreeNode, sum int) {
+		if root == nil {
+			return
 		}
-		if (*pathMap)[path-targetSum] != 0 {
-			*num += (*pathMap)[path-targetSum]
-		}
-		(*pathMap)[path]++
-		preOrder(root.Left, path, targetSum, pathMap, num)
-		preOrder(root.Right, path, targetSum, pathMap, num)
-		(*pathMap)[path]--
+		sum += root.Val
+		result += pathMap[sum-targetSum]
+		pathMap[sum]++
+		preOrder(root.Left, sum)
+		preOrder(root.Right, sum)
+		pathMap[sum]--
 	}
+	preOrder(root, 0)
+	return result
 }
